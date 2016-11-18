@@ -1,0 +1,22 @@
+{
+	"data":
+	[
+		{
+			"filter": "0Launch",
+			"keyword":
+			{
+				"color":
+				"#d21559"
+			}
+		}
+	],
+	"default":
+	{
+		"background": "./background.jpg",
+		"padding": 50,
+		"title": {
+			"color":
+			"#545454"
+		}
+	}
+}

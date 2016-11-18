@@ -1,0 +1,33 @@
+fastlane_version "1.108.0"
+
+default_platform :ios
+
+ENV['DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS'] = '-t DAV'
+
+platform :ios do
+  #
+  # Learn more here: https://github.com/fastlane/setups/blob/master/samples-ios/distribute-beta-build.md 🚀
+  #
+
+  lane :certificates do
+    match(app_identifier: ['com.rtayal.Translate', 'com.rtayal.Translate.TranslateActionExtension', 'com.rtayal.Translate.TranslateClipboardExtension', 'com.rtayal.Translate.watchkitapp', 'com.rtayal.Translate.watchkitapp.watchkitextension'], type: 'development')
+    match(app_identifier: ['com.rtayal.Translate', 'com.rtayal.Translate.TranslateActionExtension', 'com.rtayal.Translate.TranslateClipboardExtension', 'com.rtayal.Translate.watchkitapp', 'com.rtayal.Translate.watchkitapp.watchkitextension'], type: 'appstore')
+  end
+
+  lane :screenshots do 
+  	snapshot(scheme: "Translate", stop_after_first_error: true, devices: ["iPhone 7 Plus"], languages: ["en-US"])
+  	frameit(white: true)
+  	deliver
+  end
+
+  lane :app_store do
+    match(app_identifier: ['com.rtayal.Translate', 'com.rtayal.Translate.TranslateActionExtension', 'com.rtayal.Translate.TranslateClipboardExtension', 'com.rtayal.Translate.watchkitapp', 'com.rtayal.Translate.watchkitapp.watchkitextension'], type: 'appstore')
+  	gym(scheme: 'Translate')
+  	pilot(skip_waiting_for_build_processing: true)
+  end
+end
+
+# use_legacy_build_api: true, export_method: 'app-store',
+# , codesigning_identity: 'iPhone Distribution: appikon software private limited')
+
+# https://hooks.slack.com/services/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
